@@ -63,9 +63,13 @@
             var thx = new Audio("thx.mp3");
             thx.play();
 
-            setTimeout(function () {
-                alert("Congratulations, you found AVA!");
-            }, 500)
+            let congratulationContent=document.createElement('div');
+            congratulationContent.className='alert-box';
+            let congratulationMask=document.createElement('div');
+            congratulationMask.className='alert-mask';
+            document.body.appendChild(congratulationMask);
+            document.body.appendChild(congratulationContent);
+            document.getElementById('mario').onclick=null;
         }
 
         function calculateDistance(elem, mouseX, mouseY) {

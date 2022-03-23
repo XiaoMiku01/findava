@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
+        </script>
+    <link href="nintendo.css" rel="stylesheet" />
+    <title>Find AVA</title>
+</head>
+
+<body onload="toggleModal()">
+    <!-- Modal -->
+    <div class="modal fade" id="gameOptions" tabindex="-1" role="dialog" aria-labelledby="gameOptions"
+        aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">找到小向晚</h5>
+                </div>
+                <div class="modal-body">
+                    <p>AVAVAVA!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="startGame()">I'm
+                        ready!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="mario" onclick="foundMario(this)"></div>
+
+    <script>
+        var audio = new Audio("ava.mp3");
+        var yahooLoop = null;
+
+        function toggleModal() {
+            var myModal = new bootstrap.Modal(document.getElementById('gameOptions'));
+            myModal.toggle();
+        }
+
+        function startGame() {
+            var mario = document.getElementById('mario');
+            mario.style.position = "absolute";
+            mario.style.left = Math.floor(Math.random() * window.innerWidth - 50) + 'px';
+            mario.style.top = Math.floor(Math.random() * window.innerHeight - 100) + 'px';
+
+            yahooLoop = setInterval(function () {
+                audio.play();
+            }, 5)
+        }
+
+        function foundMario(element) {
+            clearInterval(yahooLoop);
+            element.style.opacity = "1.0";
+
+            var thx = new Audio("thx.mp3");
+            thx.play();
+
+            setTimeout(function () {
+                alert("Congratulations, you found AVA!");
+            }, 500)
+        }
+
+        function calculateDistance(elem, mouseX, mouseY) {
+            return Math.floor(Math.sqrt(Math.pow(mouseX - (elem.left + (elem.width / 2)), 2) + Math.pow(mouseY - (elem
+                .top + (elem.height / 2)), 2)));
+        }
+
+        document.addEventListener('mousemove', (event) => {
+            var mario = document.getElementById('mario').getBoundingClientRect();
+            var distance = calculateDistance(mario, event.clientX, event.clientY);
+
+            // kms
+            if (distance < 100) audio.playbackRate = 10;
+            else if (distance < 200) audio.playbackRate = 8;
+            else if (distance < 300) audio.playbackRate = 6;
+            else if (distance < 300) audio.playbackRate = 4;
+            else if (distance < 300) audio.playbackRate = 3;
+            else if (distance < 500) audio.playbackRate = 2.5;
+            else if (distance < 700) audio.playbackRate = 1.5;
+            else if (distance < 900) audio.playbackRate = 1;
+            else audio.playbackRate = 0.5;
+        });
+    </script>
+</body>
+
+</html>

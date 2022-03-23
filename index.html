@@ -78,15 +78,15 @@
             var distance = calculateDistance(mario, event.clientX, event.clientY);
 
             // kms
-            if (distance < 100) audio.playbackRate = 10;
-            else if (distance < 200) audio.playbackRate = 8;
-            else if (distance < 300) audio.playbackRate = 6;
-            else if (distance < 300) audio.playbackRate = 4;
-            else if (distance < 300) audio.playbackRate = 3;
-            else if (distance < 500) audio.playbackRate = 2.5;
-            else if (distance < 700) audio.playbackRate = 1.5;
-            else if (distance < 900) audio.playbackRate = 1;
-            else audio.playbackRate = 0.5;
+            if (distance < 100) audio.volume = 1;
+            else if (distance < 200) audio.volume = 0.8;
+            else if (distance < 300) audio.volume = 0.6;
+            else if (distance < 300) audio.volume = 0.4;
+            else if (distance < 300) audio.volume = 0.3;
+            else if (distance < 500) audio.volume = 0.25;
+            else if (distance < 700) audio.volume = 0.15;
+            else if (distance < 900) audio.volume = 0.1;
+            else audio.volume = 0.5;
         });
     </script>
 </body>
